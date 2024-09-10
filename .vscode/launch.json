@@ -1,0 +1,25 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "mono",
+      "request": "launch",
+      "program": "${workspaceRoot}/FnaTestProject/bin/Debug/net8.0/Game.exe",
+      "cwd": "${workspaceRoot}",
+      "env": {
+        "LD_LIBRARY_PATH": "${workspaceRoot}/Fna_Test_Project/fnalibs/lib64/"
+      }
+    },
+    {
+      "name": "Attach",
+      "type": "mono",
+      "request": "attach",
+      "address": "localhost",
+      "port": 55555
+    }
+  ]
+}

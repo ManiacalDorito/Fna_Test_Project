@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FnaTestProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e45ca73a37279a963d94120dcfa794e2f61a501")]
 [assembly: System.Reflection.AssemblyProductAttribute("FnaTestProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FnaTestProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using FnaTestProject;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,6 +18,7 @@ class MainScript : Game {
     // Set this up to eventually draw all our sprites.
     private SpriteBatch spriteBatch;
     private Scene currentRenderedScene;
+    private GameObject[] loadedObjs;
 
     /*
     The general run order of the engine is as such:
@@ -58,6 +60,8 @@ class MainScript : Game {
 
     protected override void Initialize()
     {
+        loadedObjs = new GameObject[0];
+
         /* good place to start the engine and load all that.
         * do it after loading config in the constructor
         */
@@ -75,6 +79,25 @@ class MainScript : Game {
         // We want to check if the gameobject has a sprite component, and if it does, we will
         // add it to the 
 
+        GameObject loadingObj;
+
+        foreach (GameObject loopObj in currentRenderedScene.sceneObjects) 
+        {
+            // In this loop, check for every component on an object that needs loading.
+            if (loopObj.HasTexture()) 
+            {
+                // make a new empty object
+                loadingObj = new GameObject();
+
+                // load the new objects texture
+                loadingObj = loopObj;
+                loadingObj.texture2D = Content.Load<Texture2D>(loopObj.TexturePath);
+                loadedObjs.Append(loadingObj);
+            }
+
+
+        }
+
         // Load textures, sounds, etc....
     }
 
@@ -86,6 +109,9 @@ class MainScript : Game {
 
     protected override void Update(GameTime gameTime)
     {
+
+        
+
         // Run game logic, do not render here.
         base.Update(gameTime);
     }
@@ -93,6 +119,18 @@ class MainScript : Game {
     protected override void Draw(GameTime gameTime)
     {
         // Render stuff, do not run game logic here.
+
+        spriteBatch.Begin();
+
+        foreach (GameObject loadedObj in loadedObjs) 
+        {
+            if (loadedObj.HasTexture())
+            {
+                spriteBatch.Draw(loadedObj.texture2D, loadedObj.position, Color.White);
+            }
+        }
+
+        spriteBatch.End();
 
         base.Draw(gameTime);
 

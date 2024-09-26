@@ -31,3 +31,4 @@ c:\Users\mrpot\OneDrive\Desktop\Fna_Test_Project\Fna_Test_Project\FnaTestProject
 c:\Users\mrpot\OneDrive\Desktop\Fna_Test_Project\Fna_Test_Project\FnaTestProject\obj\Debug\net8.0\FnaTestProject.pdb
 c:\Users\mrpot\OneDrive\Desktop\Fna_Test_Project\Fna_Test_Project\FnaTestProject\obj\Debug\net8.0\FnaTestProject.genruntimeconfig.cache
 c:\Users\mrpot\OneDrive\Desktop\Fna_Test_Project\Fna_Test_Project\FnaTestProject\obj\Debug\net8.0\ref\FnaTestProject.dll
+c:\Users\mrpot\OneDrive\Desktop\Fna_Test_Project\Fna_Test_Project\FnaTestProject\obj\Debug\net8.0\FnaTestProject.sourcelink.json

@@ -7,7 +7,7 @@ public class Scene
 {
 
     public string name;
-    public required Dictionary<float, GameObject> sceneObjects;
+    public required GameObject[] sceneObjects;
 
     public Scene(string c_name) 
     {
@@ -15,10 +15,15 @@ public class Scene
     }
 
     // override for copying scenes
-    public Scene(string c_name, Dictionary<float, GameObject> c_sceneobjects)
+    public Scene(string c_name, GameObject[] c_sceneobjects)
     {
         name = c_name;
         sceneObjects = c_sceneobjects;
     }
 
+
+
+    public void LoadSceneObjects() {
+
+    }
 }

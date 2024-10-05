@@ -8,20 +8,22 @@ namespace FnaTestProject;
 public class GameObject
 {
     public Texture2D texture2D;
-    public string TexturePath;
+    public string texturePath;
     public Vector2 position;
     public float rotation;
 
 
-    public GameObject()
+    public GameObject(string c_path, Vector2 c_position, float c_rotation)
     {
-        
+        texturePath = c_path;
+        position = c_position;
+        rotation = c_rotation;
     }
 
 
 
     public bool HasTexture() {
-        return TexturePath != null;
+        return texturePath != null;
     }
 
 

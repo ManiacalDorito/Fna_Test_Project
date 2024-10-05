@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using FnaTestProject;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 class MainScript : Game {
@@ -18,7 +20,12 @@ class MainScript : Game {
     // Set this up to eventually draw all our sprites.
     private SpriteBatch spriteBatch;
     private Scene currentRenderedScene;
-    private GameObject[] loadedObjs;
+    public GameObject[] loadedObjs;
+
+    private KeyboardState keyboardState;
+    private Camera currentGameCamera;
+
+    private SpriteFont debugFont;
 
     /*
     The general run order of the engine is as such:
@@ -60,7 +67,18 @@ class MainScript : Game {
 
     protected override void Initialize()
     {
-        loadedObjs = new GameObject[0];
+        currentRenderedScene = new Scene("Test Scene");
+
+        loadedObjs = new GameObject[100];
+
+        keyboardState = new KeyboardState();
+        currentRenderedScene.sceneObjects = new GameObject[100];
+
+        currentGameCamera = new Camera(Vector2.Zero, Color.Aqua, 100f, keyboardState);
+
+        GameObject test = new GameObject("Sprites/TestSprite", Vector2.Zero, 0.0f);
+        // a testing gameobject
+        currentRenderedScene.sceneObjects[0] = test;
 
         /* good place to start the engine and load all that.
         * do it after loading config in the constructor
@@ -74,6 +92,8 @@ class MainScript : Game {
 
         spriteBatch = new SpriteBatch(GraphicsDevice);
 
+        debugFont = Content.Load<SpriteFont>("Fonts/DePixelBreit");
+
         // Now load all the gameobjects in the scene, which are collections of components.
         // Do a foreach for every gameobject, make a list of loaded gameobjects
         // We want to check if the gameobject has a sprite component, and if it does, we will
@@ -83,16 +103,18 @@ class MainScript : Game {
 
         foreach (GameObject loopObj in currentRenderedScene.sceneObjects) 
         {
+            if (loopObj == null)
+            {
+                return;
+            }
+
             // In this loop, check for every component on an object that needs loading.
             if (loopObj.HasTexture()) 
             {
                 // make a new empty object
-                loadingObj = new GameObject();
-
-                // load the new objects texture
-                loadingObj = loopObj;
-                loadingObj.texture2D = Content.Load<Texture2D>(loopObj.TexturePath);
-                loadedObjs.Append(loadingObj);
+                loadingObj = new GameObject(loopObj.texturePath, loopObj.position, loopObj.rotation);
+                loadingObj.texture2D = Content.Load<Texture2D>(loopObj.texturePath);
+                loadedObjs[0] = loadingObj;
             }
 
 
@@ -110,6 +132,7 @@ class MainScript : Game {
     protected override void Update(GameTime gameTime)
     {
 
+        currentGameCamera.CameraMove();
         
 
         // Run game logic, do not render here.
@@ -119,20 +142,33 @@ class MainScript : Game {
     protected override void Draw(GameTime gameTime)
     {
         // Render stuff, do not run game logic here.
-
+        GraphicsDevice.Clear(Color.White);
         spriteBatch.Begin();
+
+        
 
         foreach (GameObject loadedObj in loadedObjs) 
         {
-            if (loadedObj.HasTexture())
+
+            if (loadedObj != null)
             {
-                spriteBatch.Draw(loadedObj.texture2D, loadedObj.position, Color.White);
+                if (loadedObj.HasTexture())
+                {
+                    // We add the cameras position to the objects position to account for camera movement.
+                    spriteBatch.Draw(loadedObj.texture2D, loadedObj.position + currentGameCamera.cameraPos, Color.White);
+                }
+    
             }
         }
 
+        spriteBatch.DrawString(debugFont, gameTime.ElapsedGameTime.ToString(), Vector2.Zero, Color.Aqua);
         spriteBatch.End();
 
+        
+
         base.Draw(gameTime);
+
+    
 
     }
 

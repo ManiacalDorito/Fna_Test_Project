@@ -7,7 +7,7 @@ public class Scene
 {
 
     public string name;
-    public required GameObject[] sceneObjects;
+    public GameObject[] sceneObjects;
 
     public Scene(string c_name) 
     {

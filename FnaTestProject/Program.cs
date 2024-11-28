@@ -25,7 +25,7 @@ class MainScript : Game {
     private KeyboardState keyboardState;
     private Camera currentGameCamera;
 
-    private SpriteFont debugFont;
+    //private SpriteFont debugFont;
 
     /*
     The general run order of the engine is as such:
@@ -74,7 +74,7 @@ class MainScript : Game {
         keyboardState = new KeyboardState();
         currentRenderedScene.sceneObjects = new GameObject[100];
 
-        currentGameCamera = new Camera(Vector2.Zero, Color.Aqua, 100f, keyboardState);
+        currentGameCamera = new Camera(Vector2.Zero, Color.Aqua, 1f, keyboardState);
 
         GameObject test = new GameObject("Sprites/TestSprite", Vector2.Zero, 0.0f);
         // a testing gameobject
@@ -91,8 +91,6 @@ class MainScript : Game {
         base.LoadContent();
 
         spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        debugFont = Content.Load<SpriteFont>("Fonts/DePixelBreit");
 
         // Now load all the gameobjects in the scene, which are collections of components.
         // Do a foreach for every gameobject, make a list of loaded gameobjects
@@ -132,7 +130,7 @@ class MainScript : Game {
     protected override void Update(GameTime gameTime)
     {
 
-        currentGameCamera.CameraMove();
+        currentGameCamera.CameraMove(gameTime);
         
 
         // Run game logic, do not render here.
@@ -161,7 +159,7 @@ class MainScript : Game {
             }
         }
 
-        spriteBatch.DrawString(debugFont, gameTime.ElapsedGameTime.ToString(), Vector2.Zero, Color.Aqua);
+        //spriteBatch.DrawString(debugFont, gameTime.ElapsedGameTime.ToString(), Vector2.Zero, Color.Aqua);
         spriteBatch.End();
 
         

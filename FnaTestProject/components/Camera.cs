@@ -37,27 +37,28 @@ public class Camera {
     }
 
     // Changes the cameras position according to Input.
-    public void CameraMove() 
+    public void CameraMove(GameTime gameTime) 
     {
-        if (true)
+        keyboardPrev = Keyboard.GetState();
+
+        if (keyboardPrev.IsKeyDown(Keys.W))
         {
-            cameraPos.Y++;
-            Debug.WriteLine("W pressed");
+            cameraPos.Y += moveSpeed * (keyboardPrev.IsKeyDown(Keys.LeftShift) ? 2 : 1);
         }
 
         if (keyboardPrev.IsKeyDown(Keys.A))
         {
-            cameraPos.X -= moveSpeed;
+            cameraPos.X += moveSpeed * (keyboardPrev.IsKeyDown(Keys.LeftShift) ? 2 : 1);
         }
 
         if (keyboardPrev.IsKeyDown(Keys.D))
         {
-            cameraPos.X += moveSpeed;
+            cameraPos.X -= moveSpeed * (keyboardPrev.IsKeyDown(Keys.LeftShift) ? 2 : 1);
         }
 
         if (keyboardPrev.IsKeyDown(Keys.S))
         {
-            cameraPos.Y -= moveSpeed;
+            cameraPos.Y -= moveSpeed * (keyboardPrev.IsKeyDown(Keys.LeftShift) ? 2 : 1);
         }
     }
 

@@ -51,6 +51,8 @@ class MainScript : Game {
 
     private MainScript() 
     {
+
+        // we initialize the graphics device manager. This is what allows us to render the scene.
         GraphicsDeviceManager gdm = new GraphicsDeviceManager(this);
 
         // sets up for loading our scenes later.
@@ -69,10 +71,10 @@ class MainScript : Game {
     {
         currentRenderedScene = new Scene("Test Scene");
 
-        loadedObjs = new GameObject[100];
+        loadedObjs = [];
 
         keyboardState = new KeyboardState();
-        currentRenderedScene.sceneObjects = new GameObject[100];
+        currentRenderedScene.sceneObjects = [];
 
         currentGameCamera = new Camera(Vector2.Zero, Color.Aqua, 1f, keyboardState);
 
